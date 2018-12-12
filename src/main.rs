@@ -13,9 +13,11 @@ fn main() {
         Ok(i)
     };
 
+    let mut guess;
+
     loop {
         println!("Please input your guess.");
-        let mut guess = String::new();
+        guess = String::new();
         io::stdin()
             .read_line(&mut guess)
             .expect("Failed to read line");
