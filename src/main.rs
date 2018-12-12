@@ -30,7 +30,7 @@ fn main() {
                 }
             },
             Err(_) => {
-                println!("Please type a number");
+                println!("Please type a number.");
                 continue;
             }
         }
