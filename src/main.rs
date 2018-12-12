@@ -19,14 +19,14 @@ fn guess_number() {
             .read_line(&mut guess)
             .expect("Failed to read line");
 
-        let guess: u32 = match guess.trim().parse() {
-            Ok(num) => num,
-            Err(_) => {
-                println!("Please type a number");
-                continue;
-            }
-        };
+        let guess: Result<u32, std::num::ParseIntError> = parse_u32(guess);
 
+        if !guess.is_ok() {
+            println!("Please type a number");
+            continue;
+        }
+
+        let guess: u32 = guess.unwrap();
         println!("You guessed: {}", guess);
 
         match guess.cmp(&secret_number) {
@@ -38,4 +38,9 @@ fn guess_number() {
             }
         }
     }
+}
+
+fn parse_u32(s: String) -> Result<u32, std::num::ParseIntError> {
+    let i: u32 = s.trim().parse()?;
+    Ok(i)
 }
