@@ -3,10 +3,11 @@ use std::cmp::Ordering;
 use std::io;
 
 fn main() {
-    println!("Guess the number!");
-
-    let secret_number = rand::thread_rng().gen_range(1, 101);
+    let min = 1;
+    let max = 100;
+    let secret_number = rand::thread_rng().gen_range(min, max);
     // println!("The secret number is: {}", secret_number);
+    println!("电脑：猜猜我的秘密数字[{} {}]", min, max);
 
     let parse_u32 = |s: String| -> Result<u32, std::num::ParseIntError> {
         let i: u32 = s.trim().parse()?;
@@ -16,7 +17,6 @@ fn main() {
     let mut guess;
 
     loop {
-        println!("Please input your guess.");
         guess = String::new();
         io::stdin()
             .read_line(&mut guess)
@@ -24,15 +24,15 @@ fn main() {
 
         match parse_u32(guess) {
             Ok(guess) => match guess.cmp(&secret_number) {
-                Ordering::Less => println!("Too small"),
-                Ordering::Greater => println!("Too big"),
+                Ordering::Less => println!("电脑：小了。"),
+                Ordering::Greater => println!("电脑：大了。"),
                 Ordering::Equal => {
-                    println!("You win");
+                    println!("电脑：恭喜你，猜对了。");
                     break;
                 }
             },
             Err(_) => {
-                println!("Please type a number.");
+                println!("电脑：请输入数字。");
                 continue;
             }
         }
