@@ -9,10 +9,15 @@ fn main() {
     // println!("The secret number is: {}", secret_number);
     println!("电脑：猜猜我的秘密数字[{} {}]", min, max);
 
-    let parse_u32 = |s: String| -> Result<u32, std::num::ParseIntError> {
+    // let parse_u32 = |s: String| -> Result<u32, std::num::ParseIntError> {
+    //     let i: u32 = s.trim().parse()?;
+    //     Ok(i)
+    // };
+
+    fn parse_u32(s: String) -> Result<u32, std::num::ParseIntError> {
         let i: u32 = s.trim().parse()?;
         Ok(i)
-    };
+    }
 
     let mut guess;
 
